@@ -6,7 +6,7 @@ export function gameOverScene() {
             origin('center'),
         ])
         add([
-            text(`${numberOfRoundsSurvived} was one to many`),
+            text(`${numberOfRoundsSurvived} was one too many`),
             pos(width() / 2, (height() / 2) + 50),
             scale(0.5),
             origin('center')
