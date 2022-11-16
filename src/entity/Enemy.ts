@@ -1,9 +1,9 @@
-import { GameObj, StateComp } from "kaboom"
-import type { PosComp, AreaComp, RectComp, HealthComp } from "kaboom";
+import type { PosComp, AreaComp, RectComp, HealthComp, GameObj, StateComp } from "kaboom";
 import { AggroComp, aggro} from '../comp/Aggro'
 import { speed, SpeedComp } from "../comp/Speed";
 import { PlayerComp } from "./Player";
 import { findDistance } from "../utils";
+
 
 export type EnemyComp = PosComp & AreaComp & RectComp & HealthComp & AggroComp & SpeedComp & StateComp;
 
@@ -19,6 +19,7 @@ export function addNormalEnemy(x: number, y: number): GameObj<EnemyComp> {
 		health(3),
 		aggro(),
 		speed(100),
+		solid(),
 		state('normal', ['normal', 'stunned']),
 		'enemy',
 	])

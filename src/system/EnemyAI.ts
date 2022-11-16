@@ -3,7 +3,7 @@ import { isEnemy } from "../entity/Enemy";
 import { PlayerComp } from "../entity/Player";
 import { findDirection, findDistance } from "../utils";
 
-export function EnemyAI(player: GameObj<PlayerComp>, score) {
+export function EnemyAI(player: GameObj<PlayerComp>, score, numberOfEnemies: number) {
     const enemies = get('enemy');
 
     enemies.forEach((enemy) => {
@@ -12,7 +12,7 @@ export function EnemyAI(player: GameObj<PlayerComp>, score) {
         enemy.onDeath(() => {
             destroy(enemy)
             player.score++;
-            score.text = player.score + '';
+            score.text = numberOfEnemies - player.score + '';
         })
         enemy.onStateEnter('stunned', async () => {
             await wait(0.3);

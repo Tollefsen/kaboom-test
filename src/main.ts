@@ -1,50 +1,21 @@
 import kaboom from "kaboom"
-import { addNormalEnemyAvoidPlayer } from "./entity/Enemy";
-import { addGun } from "./entity/Gun";
-import { addDefaultPlayer } from "./entity/Player";
-import { bulletHitsEnemy, enemyHitsPlayer, playerPicksupGun } from "./system/Collisions";
-import { EnemyAI } from "./system/EnemyAI";
-import { PlayerSystem } from "./system/PlayerSystem";
-import { addPlayerControllers } from "./system/PlayerControllers";
-import { doXTimes } from "./utils";
+import { introScene } from "./scene/intro";
+import { gameScene } from "./scene/game";
+import { gameOverScene } from "./scene/gameOver";
+import { winScene } from "./scene/win";
+import { transitionScene } from "./scene/transition";
 
 kaboom()
 
 loadSprite("bean", "sprites/bean.png")
 
 
-// Entities
+introScene()
+gameScene()
+gameOverScene()
+winScene()
+transitionScene()
 
-// Add player
-const player = addDefaultPlayer();
-
-
-// Add score
-const score = add([
-	text(player.score + ''),
-	pos(10, 10)
-])
-
-// Add enemies
-doXTimes(10, () => addNormalEnemyAvoidPlayer(player))
-
-// Add gun
-addGun()
-
-
-// Systems
-
-addPlayerControllers(player)
-
-bulletHitsEnemy()
-enemyHitsPlayer()
-playerPicksupGun()
-PlayerSystem()
-
-EnemyAI(player, score)
-
-onUpdate(() => {
-	//debug.log(player.state)
-})
+go('intro')
 
 debug.inspect = true

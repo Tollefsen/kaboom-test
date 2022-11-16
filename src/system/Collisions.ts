@@ -13,21 +13,35 @@ export function bulletHitsEnemy() {
 
 
 // Enemy hits player
+// TODO: collision triggers twice, why?
 export function enemyHitsPlayer() {
     onCollide('enemy', 'player', (enemy, player) => {
 
-        if (!isPlayer(player) || !isEnemy(enemy)) return;
-        player.hurt(1);
-
         const dir = findDirection(enemy, player);
-        
+
+        if (!isPlayer(player) || !isEnemy(enemy)) return;
+        if (player.state !== 'stunned') {
+            player.hurt(1);
+            player.enterState('stunned')
+            enemy.enterState('stunned')
+        }
+  
         //Bounce the player away
-        player.move(dir.unit().scale(player.speed * 30))
-        player.enterState('stunned')
-        enemy.enterState('stunned')
+        player.move(dir.unit().scale(player.speed * 20))
+        
     })
 }
 
+// Enemy hits enemy
+export function enemyHitsEnemy() {
+    onCollide('enemy', 'enemy', (enemy1, enemy2) => {
+        if (!isEnemy(enemy1) || !isEnemy(enemy2)) return;
+        // Bounce them away from each other to avail a deadlock
+        const dir = findDirection(enemy1, enemy2);
+        enemy1.move(dir.unit().scale(-enemy1.speed / 2))
+        enemy2.move(dir.unit().scale(enemy2.speed / 2))
+    })
+}
 
 // Pickup gun
 export function playerPicksupGun() {
