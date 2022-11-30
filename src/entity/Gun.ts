@@ -12,3 +12,13 @@ export function addGun(): GameObj<GunComp> {
     ]);
 }
 
+export function addGunWithPos(x: number, y: number): GameObj<GunComp> {
+    return add([
+        pos(x, y),
+        rect(40, 40),
+        color(0, 0, 255),
+        area(),
+        'gun'
+    ])
+}
+

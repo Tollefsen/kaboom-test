@@ -1,5 +1,5 @@
 import { GameObj } from "kaboom";
-import { findDirection, findDistance } from "../utils";
+import { findDirection, findDirectionObjToPos, findDistance } from "../utils";
 import { PlayerComp } from "./Player";
 
 export const spawnBullet = (player: GameObj<PlayerComp>) => {
@@ -23,4 +23,24 @@ export const spawnBullet = (player: GameObj<PlayerComp>) => {
 		move(direction, 400),
 		'bullet'
 	])
+}
+
+export function spawnBulletTowardsMouse(player: GameObj<PlayerComp>) {
+	if(!player.hasGun || !player.exists) return;
+	
+	const direction = findDirectionObjToPos(player, toWorld(mousePos()));
+
+	add([
+		pos(player.pos),
+		sprite('bean'),
+		scale(0.5),
+		area(),
+		cleanup(),
+		move(direction, 400),
+		'bullet'
+	])
+}
+
+export function shootGun(player: GameObj<PlayerComp>, gun) {
+	
 }

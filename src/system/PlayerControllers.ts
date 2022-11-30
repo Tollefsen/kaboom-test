@@ -1,5 +1,5 @@
 import { GameObj, Key } from "kaboom"
-import { spawnBullet } from "../entity/Bullet"
+import { spawnBulletTowardsMouse } from "../entity/Bullet"
 import { PlayerComp } from "../entity/Player"
 
 
@@ -18,8 +18,13 @@ export function addPlayerControllers(player: GameObj<PlayerComp>) {
         })
     }
 
-    onKeyPress('space', () => {
+    onMousePress(() => {
         if (player.state === 'stunned') return;
-        spawnBullet(player)
+        spawnBulletTowardsMouse(player)
+    })
+
+    onKeyPress('space', () => {
+        if (['stunned', 'dash', 'cooldown'].includes(player.state)) return;
+        player.enterState('dash');
     })
 }
