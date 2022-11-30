@@ -20,7 +20,8 @@ export function addNormalEnemy(x: number, y: number): GameObj<EnemyComp> {
 		aggro(),
 		speed(100),
 		solid(),
-		state('normal', ['normal', 'stunned']),
+		origin('center'),
+		state('idle', ['idle', 'stunned', 'aggro', 'charge', 'leap']),
 		'enemy',
 	])
 }

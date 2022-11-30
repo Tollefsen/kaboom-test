@@ -6,6 +6,10 @@ export function findDirection(obj1: GameObj, obj2: GameObj): Vec2 {
 	return pos2.sub(pos1).unit()
 }
 
+export function findDirectionObjToPos(obj: GameObj, pos: Vec2): Vec2 {
+    return pos.sub(obj.pos).unit();
+}
+
 
 export function findDistance(obj1: GameObj, obj2: GameObj) {
 	return obj1.pos.dist(obj2.pos);

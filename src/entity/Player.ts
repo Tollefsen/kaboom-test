@@ -19,8 +19,9 @@ export function addDefaultPlayer(): GameObj<PlayerComp> {
         score(),
         health(5),
         speed(320),
-        state('normal', ['normal', 'stunned']),
+        state('normal', ['normal', 'stunned', 'dash', 'cooldown']),
         opacity(),
+        origin('center'),
         'player',
     ])
 }

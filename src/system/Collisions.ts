@@ -20,11 +20,11 @@ export function enemyHitsPlayer() {
         const dir = findDirection(enemy, player);
 
         if (!isPlayer(player) || !isEnemy(enemy)) return;
-        if (player.state !== 'stunned') {
-            player.hurt(1);
-            player.enterState('stunned')
-            enemy.enterState('stunned')
-        }
+        if (['dash', 'stunned'].includes(player.state)) return; //Player takes no damage in some states.
+        player.hurt(1);
+        player.enterState('stunned')
+        enemy.enterState('stunned')
+        shake(1);
   
         //Bounce the player away
         player.move(dir.unit().scale(player.speed * 20))
