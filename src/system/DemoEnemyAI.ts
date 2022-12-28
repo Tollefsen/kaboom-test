@@ -1,6 +1,7 @@
 import { GameObj } from "kaboom";
 import { isEnemy } from "../entity/Enemy";
 import { PlayerComp } from "../entity/Player";
+import { getDemoSceneGameState } from "../scene/demo";
 import { findDirection, findDistance } from "../utils";
 
 export function DemoEnemyAI(player: GameObj<PlayerComp>) {
@@ -10,6 +11,9 @@ export function DemoEnemyAI(player: GameObj<PlayerComp>) {
         if (!isEnemy(enemy)) return;
         
         enemy.onDeath(() => {
+            const gameState = getDemoSceneGameState();
+            gameState.enemiesKilled += 1;
+            gameState.playerScore += 10;
             destroy(enemy)
         })
         enemy.onStateEnter('stunned', async () => {

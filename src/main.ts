@@ -12,7 +12,7 @@ loadSprite("bean", "sprites/bean.png");
 loadSprite("playerface", "sprites/Playerface.png");
 loadSprite("healthFull", "sprites/HealthFull.png");
 loadSprite("healthEmpty", "sprites/HealthEmpty.png");
-
+loadSprite("grass", "sprites/grass-tiles.jpeg")
 
 introScene()
 gameScene()
